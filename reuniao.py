@@ -1,5 +1,5 @@
 class ParticipanteReuniao:
-    """docstring for """
+    """docstring for ParticipandeReuniao"""
     def __init__(self):
         
 

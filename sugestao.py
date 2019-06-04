@@ -1,5 +1,5 @@
 class Sugestao(object):
-    """docstring for Sugetao"""
+    """docstring for Sugestao"""
     def __init__(self):
         self.data = ""
         self.descricao = ""
