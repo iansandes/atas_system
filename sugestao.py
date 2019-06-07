@@ -1,12 +1,15 @@
+from datetime import date
+
 class Sugestao:
     """docstring for Sugestao"""
 
     def __init__(self):
-        self.data = ""
+        self.id = ""
+        self.data = date.today()
         self.descricao = ""
 
-    def emitirSugetao(self):
-        ...
+    def emitirSugestao(self):
+        self.descricao = input('Insira sua sugestão: ')
 
-    def selecionarSugetao(self):
+    def selecionarSugestao(self):
         ...
