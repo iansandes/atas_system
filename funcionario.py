@@ -6,17 +6,19 @@ class Funcionario:
 
     con = sqlite3.connect('banco_funcionarios.db')
     cur = con.cursor()
-    sql = """
-    CREATE TABLE funcionarios(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-                              name TEXT NOT NULL,
-                              matricula TEXT NOT NULL,
-                              sexo TEXT NOT NULL,
-                              nascimento TEXT NOT NULL,
-                              email TEXT NOT NULL) """
+    try: 
+        sql = """
+        CREATE TABLE funcionarios(id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+                                name TEXT NOT NULL,
+                                matricula TEXT NOT NULL,
+                                sexo TEXT NOT NULL,
+                                nascimento TEXT NOT NULL,
+                                email TEXT NOT NULL) """
 
-    cur.execute(sql)
-    con.commit()
-    con.close()
+        cur.execute(sql)
+        con.commit()
+    except:
+        con.close()
 
     def __init__(self):
         self.nome = ""
@@ -40,7 +42,3 @@ class Funcionario:
         cur.execute(sql)
         con.commit()
         con.close()
-
-
-    def selecionar(self):
-        ...
