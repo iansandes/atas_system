@@ -31,7 +31,7 @@ class Funcionario:
         self.nome = input('Nome: ')
         self.matricula = input('Matricula: ')
         self.sexo = input('Sexo [M/F]: ')
-        self.nascimento = input('Data de nascimento: ')
+        self.nascimento = input('Data de nascimento [dd/mm/aaaa]: ')
         self.email = input('Email: ')
 
         con = sqlite3.connect('banco_funcionarios.db')

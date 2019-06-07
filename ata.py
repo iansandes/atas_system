@@ -1,5 +1,6 @@
 from datetime import date
 import sqlite3
+import pickle
 
 
 class Ata(object):
@@ -17,6 +18,7 @@ class Ata(object):
         self.status = ""
         self.funcionario = ""
         self.participantes = []
+        self.ata = ""
 
 
     def emitirAta(self):
@@ -34,7 +36,7 @@ class Ata(object):
             self.descricao = input('Descrição da reunião: ')
             for x in range(0,5):
                 self.palavrasChaves.append(input('Palavra-chave: '))
-                ask = input('Deseja adicionar mais uma palavra chave [S/N]? ')
+                ask = input('\nDeseja adicionar mais uma palavra chave [S/N]? ')
                 if ask.upper() == 'S':
                     pass
                 else:
@@ -43,12 +45,18 @@ class Ata(object):
                     else:
                         break
             self.tipo = input('Tipo: ')
-            aprovacao = input('A ata foi aprovada [S/N]? ')
+            aprovacao = input('\nA ata foi aprovada [S/N]? ')
             if aprovacao.upper() == 'S':
                 self.status = "Emitida"
                 self.funcionario = funcionario
             else:
                 print('Ata não aprovada!')
+
+            ata = dict(titulo=self.titulo, emissao=self.dataEmissao, inicio=self.inicio,
+                    termino=self.termino, pauta=self.pauta, descricao=self.descricao,
+                    tipo=self.tipo, status=self.status, funcionario=self.funcionario,
+                    participantes=self.participantes)
+            self.ata = ata
             
         else:
             print('Impossível emitir ata!')
@@ -73,7 +81,37 @@ class Ata(object):
         print('Funcionário que emitiu a ata: {}'.format(self.funcionario))
 
     def salvarAta(self):
-        ...
+        try:
+            with open('atas.pkl', mode='rb') as atas:
+                antigas_atas = pickle.load(atas)
+            with open('atas.pkl', mode='wb') as atas:
+                antigas_atas.append(self.ata)
+                novas_atas = pickle.dumps(antigas_atas)
+                atas.write(novas_atas)
+        except:
+            with open('atas.pkl', mode='wb') as atas:
+                novas_atas = [self.ata]
+                ata_lista = pickle.dumps(novas_atas)
+                atas.write(ata_lista)
 
     def atualizarAta(self):
-        ...
+        try:
+            with open('atas.pkl', mode='rb') as atas:
+                antigas_atas = pickle.load(atas)
+            
+            for x, ata in enumerate(antigas_atas):
+                print('{}       {}'.format(x, ata['titulo']))
+
+            selecao = int(input('Selecione o número da ata: '))
+
+            ata_selecionada = ""
+            for x, ata in enumerate(antigas_atas):
+                if x == selecao:
+                    ata_selecionada = ata
+                    print('Ata selecionada!\n')
+                    print(ata_selecionada)
+                else:
+                    break
+        except:
+            print('Não existem atas!')
+            
