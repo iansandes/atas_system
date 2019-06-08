@@ -38,29 +38,28 @@ def menu_reuniao():
 
 
 def menu_principal():
-    print("\n")
-    print(20 * "-=")
-    print("       SISTEMA DE ATAS")
-    print(20 * "-=")
+        while True:
+            print("\n")
+            print(20 * "-=")
+            print("       SISTEMA DE ATAS")
+            print(20 * "-=")
 
-    print("--------------------\n"
-          "1 - Cadastrar Funcionário\n"
-          "2 - Cadastrar Participante Externo\n"
-          "3 - Reunião\n"
-          "--------------------")
-
-    while True:
-        atendimento = int(input("Escolha o tipo de atendimento a ser usado: "))
-        if atendimento == 1:
-            funcionario = Funcionario()
-            funcionario.incluir()
-        elif atendimento == 2:
-            participante_externo = ParticipanteExterno()
-            participante_externo.incluir()
-        elif atendimento == 3:
-            menu_reuniao()
-        else:
-            print("Opção inválida!\n")
+            print("--------------------\n"
+                "1 - Cadastrar Funcionário\n"
+                "2 - Cadastrar Participante Externo\n"
+                "3 - Reunião\n"
+                "--------------------")
+            atendimento = int(input("Escolha o tipo de atendimento a ser usado: "))
+            if atendimento == 1:
+                funcionario = Funcionario()
+                funcionario.incluir()
+            elif atendimento == 2:
+                participante_externo = ParticipanteExterno()
+                participante_externo.incluir()
+            elif atendimento == 3:
+                menu_reuniao()
+            else:
+                print("Opção inválida!\n")
 
 
 
